@@ -39,6 +39,13 @@ primaryKey=`az cosmosdb list-keys -n $accountName -g $rg --query 'primaryMasterK
 # connect our webapp to our cosmosdb
 az webapp config appsettings set -g $rg -n $webappname --settings endpoint=$endpoint primaryKey=$primaryKey
 
+# using the azure portal deploy an instance of Application Insights and get the Instrumentation Key
+az webapp config appsettings set -g $rg -n $webappname --settings InstrumentationKey=<your key>
+
+
 # Get the url to our website so that you can open it in a browser
 echo http://$webappname.azurewebsites.net
+
+
+
 ```
