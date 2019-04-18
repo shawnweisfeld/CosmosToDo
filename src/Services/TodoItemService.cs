@@ -27,7 +27,7 @@ namespace todo
 
         public static async Task<IEnumerable<TodoItem>> GetOpenItemsAsync()
         {
-            var queryText = "SELECT* FROM c WHERE c.isComplete != true";
+            var queryText = "SELECT * FROM c WHERE c.isComplete != true";
             var querySpec = new CosmosSqlQueryDefinition(queryText);
 
             // Selecting all tasks that are not completed is a cross partition query. 
