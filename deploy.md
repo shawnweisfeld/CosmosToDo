@@ -46,6 +46,17 @@ az webapp config appsettings set -g $rg -n $webappname --settings Instrumentatio
 # Get the url to our website so that you can open it in a browser
 echo http://$webappname.azurewebsites.net
 
+# create a VM, we will use this to generate artifical traffic for our website 
+az vm create -g $rg --name $webappname --image UbuntuLTS --admin-username vmadmin --generate-ssh-keys
 
+# SSH into the VM
+ssh vmadmin@<public IP Address of your vm>
+
+# update the vm and install the apache utilities
+sudo apt-get -y update
+sudo apt-get install apache2-utils
+
+# use apache benchmark to send load to your website.
+ab -n 10000 -c 10 http://<webappname>.azurewebsites.net/Load
 
 ```
