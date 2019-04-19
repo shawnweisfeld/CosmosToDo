@@ -9,13 +9,14 @@ namespace todo.Controllers
 {
     public class LoadController : Controller
     {
-        // GET: Error
-        public ActionResult Index(int duration)
+        // GET: Generate load on the cpu for between 1 to 5 seconds. 
+        public ActionResult Index()
         {
             var random = new Random();
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            while (watch.ElapsedMilliseconds < duration)
+            var duration = random.Next(1, 5);
+            while (watch.Elapsed.TotalSeconds < duration)
             {
                 var x = random.NextDouble();
                 var y = random.NextDouble();
