@@ -5,7 +5,7 @@ This set of challenges will provide you an overview of most of the major feature
 
 ## Challenge 0: Setup
 
-1. Launch the Azure Cloud Shell (Hint: https://shell.azure.com) using bash. This will provide you a bash console with the latest version of the Azure CLI installed and logged into your Azure Subscription. (Note: you can do this from your local machine if you have the CLI installed locally.)
+1. Launch the Azure Cloud Shell (Hint: https://shell.azure.com) in the bash environment. This will provide you a bash console with the latest version of the Azure CLI installed and logged into your Azure Subscription. (Note: you can do this from your local machine if you have the latest version of the CLI installed locally.)
 
 2. Ensure that you are logged into the correct subscription
 
@@ -72,7 +72,7 @@ az webapp config appsettings set -g $rg -n $webappname --settings endpoint=$endp
 az webapp config appsettings set -g $rg -n $webappname --settings InstrumentationKey=<your key>
 ```
 
-4. Navigate to your deployed website (i.e. http://yoursite.azurewebsites.net), create 10 todo items, then go back in and edit some and mark them completed.
+4. Navigate to your deployed website (i.e. http://yoursite.azurewebsites.net), create 10 todo items, then go back in and edit some and mark some completed.
 
 5. Create some errors in your site by going to the "error" controller (i.e. http://yoursite.azurewebsites.net/Error). This page will throw an "not implemented" exception. 
 
