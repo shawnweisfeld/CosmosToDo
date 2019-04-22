@@ -12,10 +12,21 @@ namespace todo.Controllers
         // GET: AvailabilityTest
         public ActionResult Index()
         {
-            //NOTE: here I am always returning a 503
-            //      however in a real applicaiton you should to some quick tests to see if things are good
-            //      for example, if you require a connection to cosmosdb and redis, check them here.
-            return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, "Service Unabailable");
+            //NOTE: here I am randomly returning a 503
+            //      in a real applicaiton you should do a quick check that all your dependencies are availabile.
+
+            var random = new Random();
+            var numb = random.Next(1, 100);
+
+            if (numb % 4 == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, "Service Unabailable");
+            }
+            else
+            {
+                return View();
+            }
+           
         }
     }
 }

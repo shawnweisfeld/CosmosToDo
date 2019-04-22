@@ -257,10 +257,10 @@
     <Content Include="Views\Item\Details.cshtml" />
     <Content Include="Views\Item\Delete.cshtml" />
     <Content Include="Views\Load\Index.cshtml" />
+    <Content Include="Views\AvailabilityTest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AvailabilityTest\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
