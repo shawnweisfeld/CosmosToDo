@@ -72,25 +72,26 @@ az webapp config appsettings set -g $rg -n $webappname --settings endpoint=$endp
 az webapp config appsettings set -g $rg -n $webappname --settings InstrumentationKey=<your key>
 ```
 
-4. Navigate to your deployed website (i.e. http://yoursite.azurewebsites.net), create 10 todo items, then go back in and edit some and mark some completed.
+4. Navigate to your deployed website (i.e. https://yoursite.azurewebsites.net), create 10 todo items, then go back in and edit some and mark some completed.
 
-5. Create some errors in your site by going to the "error" controller (i.e. http://yoursite.azurewebsites.net/Error). This page will throw an "not implemented" exception. 
+5. Create 5 errors in your site by going to the "error" controller (i.e. https://yoursite.azurewebsites.net/Error). This page throws an "not implemented" exception. 
 
 6. Using the Azure Portal create an Application Insights "application dashboard". This will provide us a bunch of default metrics to keep an eye on our application. 
 
 7. Using the "application dashboard" you just created, drill into the failures widget, and the details for the request that generated the 500 error. What information can you find out about the cause of the error?
 
-8. Go back to the "application dashboard" and look at the "Application Map". What components do you see?
+8. Using the "View in Analytics" button pull up the Kusto query behind the "Requests" chart. Review the query. 
+
+9. Go back to the "application dashboard" and look at the "Application Map". What components do you see? What was the slowest call from our website to cosmos db?
 
 ## Challenge 2: Application Insights Availability Test
-1. Create a URL Ping Test to check on the availability of our site from 5 locations around the US every 5 minutes. If the test fails it should send you a notification email. 
-2. Go into the App Service and turn it off. 
+1. Using Application Insights, create a URL Ping Test to check on the availability of our site from 5 locations around the US every 5 minutes. The url ping test should hit our availability test controller (i.e. https://yoursite.azurewebsites.net/AvailabilityTest). 
+2. Review the code for the availability controller ([here](https://github.com/shawnweisfeld/CosmosToDo/blob/master/src/Controllers/AvailabilityTestController.cs)). List some of the dependencies from the applications you work on.
 3. Do you see the failed availability tests on the "application dashboard"?
-4. Did you get the notification?
-5. Go into the App Service and turn it back on.
 
 ## Challenge 3: Application Insights Live Metrics Stream
-1. Lets start by creating a VM to generate some load on our web server, and installing the load test tool, you can do this from the Azure Cloud Shell
+1. Lets start by configuring our website to perform a "scale out" auto scale to up to 3 nodes, when the cpu hits 20%. NOTE: this is really low to ensure we can generate enough load to make the service scale out.
+2. Next lets create a VM to generate some load on our web server, and installing the load test tool, you can do this from the Azure Cloud Shell
 
 ``` bash
 # 5 to 8 character prefix to identify you (all lowercase, no special characters)
@@ -117,9 +118,24 @@ sudo apt-get install apache2-utils
 3. Use the following command from Generate Load on your VM
 
 ``` bash
-ab -n 10000 -c 10 http://<webappname>.azurewebsites.net/Load
+ab -n 10000 -c 10 https://<webappname>.azurewebsites.net/Load
 ```
 
 4. Flip back to the tab you have open with the live metrics, do you see the spike in requests and CPU load? How many web servers do you have now?
 
 ## Challenge 4: Application Insights: Alerts with Kusto
+
+The Analytics tool in Application Insights allows you to write your own Kusto queries ([Hint](https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language)) over the data that is being collected. Use this tool and write the following:
+
+1. Draw a line chart showing the count of requests over the last 3 hours, grouped into 15 minute buckets.
+2. Draw a bar chart showing the number of requests over the last 3 hours, grouped by performanceBucket.
+3. What are the top 10 pages that failed on our site in the past 3 hours, how many times did each fail?
+
+
+## Challenge 5: Application Insights: Workbooks
+
+More Info on Workbooks can be found [here](https://docs.microsoft.com/en-us/azure/azure-monitor/app/usage-workbooks)
+
+1. Create a few workbooks using the templates in the gallery
+2. Create a new or modify an existing workbook to add a new chart you created from one of the kusto queries you wrote.
+3. Pin your workbook to your "application dashboard".
