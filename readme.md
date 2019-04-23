@@ -113,7 +113,7 @@ sudo apt-get install apache2-utils
 
 2. Open the Live metrics stream from your "application dashboard", how many web servers are currently deployed? Leave this tab open. 
 
-3. Use the following command from Generate Load on your VM
+3. Use the following command to generate load from your VM
 
 ``` bash
 ab -n 10000 -c 10 https://<webappname>.azurewebsites.net/Load
@@ -121,7 +121,7 @@ ab -n 10000 -c 10 https://<webappname>.azurewebsites.net/Load
 
 4. Flip back to the tab you have open with the live metrics, do you see the spike in requests and CPU load? How many web servers do you have now?
 
-## Challenge 4: Application Insights: Alerts with Kusto
+## Challenge 4: Application Insights: Queries with Kusto
 
 The Analytics tool in Application Insights allows you to write your own Kusto queries ([Hint](https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language)) over the data that is being collected. Use this tool and write the following:
 
