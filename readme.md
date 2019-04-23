@@ -26,7 +26,6 @@ az account set -s <SubscriptionId>
 prefix=<your prefix>
 
 # setup some more variables
-gitrepo=https://github.com/shawnweisfeld/CosmosToDo
 webappname=$prefix$RANDOM
 rg=$prefix-monitoringlab
 location='eastus'
@@ -45,9 +44,6 @@ az appservice plan create --name $webappname --resource-group $rg --sku S1
 # Create a web app.
 az webapp create --name $webappname --resource-group $rg --plan $webappname
 
-# Deploy sample code to our webapp
-az webapp deployment source config --name $webappname --resource-group $rg --repo-url $gitrepo --branch master
-
 # Create a SQL API Cosmos DB account
 az cosmosdb create --resource-group $rg --name $accountName --default-consistency-level "Session"
 
@@ -59,6 +55,8 @@ primaryKey=`az cosmosdb list-keys -n $accountName -g $rg --query 'primaryMasterK
 az webapp config appsettings set -g $rg -n $webappname --settings endpoint=$endpoint primaryKey=$primaryKey
 
 ```
+
+5. Deploy the sample code to the App Service. Go to the Azure Portal and find the App Service you just deployed. Go to the "deployment center" blade and select the "external" source control option, and press Continue. Pick the App Service build service, and press Continue. Enter in the following repository name `https://github.com/shawnweisfeld/CosmosToDo` and branch name `master` and press continue. Now press finish to complete the automated deployment process. 
 
 ## Challenge 1: Application Insights: Deploy and Overview
 
