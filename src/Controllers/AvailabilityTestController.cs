@@ -13,14 +13,14 @@ namespace todo.Controllers
         public ActionResult Index()
         {
             //NOTE: here I am randomly returning a 503
-            //      in a real applicaiton you should do a quick check that all your dependencies are availabile.
+            //      in a real application you should do a quick check that all your dependencies are available.
 
             var random = new Random();
             var numb = random.Next(1, 100);
 
             if (numb % 4 == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, "Service Unabailable");
+                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, "Service Unavailable");
             }
             else
             {
