@@ -92,7 +92,7 @@ az webapp config appsettings set -g $rg -n $webappname --settings Instrumentatio
 An availability test is an outside in test to see if your site is responding to traffic and its responsiveness (more info [here](https://docs.microsoft.com/en-us/azure/azure-monitor/app/monitor-web-app-availability)). In this exercise you will create one, and look at the logs that it generates.
 
 1. Using Application Insights, create a URL Ping Test to check on the availability of our site from 5 locations around the US every 5 minutes. The url ping test should hit our availability test controller (i.e. https://yoursite.azurewebsites.net/AvailabilityTest). 
-2. Review the code for the availability controller ([here](https://github.com/shawnweisfeld/CosmosToDo/blob/master/src/Controllers/AvailabilityTestController.cs)). Thinking about the applications that you work on "in the real works", can you think of dependencies that you might have? How might you perform a quick test to see if they are available and responding to requests?
+2. Review the code for the availability controller ([here](https://github.com/shawnweisfeld/CosmosToDo/blob/master/src/Controllers/AvailabilityTestController.cs)). Thinking about the applications that you work on "in the real world", can you think of dependencies that you might have? How might you perform a quick test to see if they are available and responding to requests?
 3. Do you see the failed availability tests on the "application dashboard"?
 
 ## Challenge 3: Application Insights Live Metrics Stream
