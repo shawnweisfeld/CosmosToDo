@@ -75,9 +75,9 @@ In this challenge you are going to deploy an instances of application insights. 
 az webapp config appsettings set -g $rg -n $webappname --settings InstrumentationKey=<your key>
 ```
 
-4. Navigate to your deployed website (i.e. https://yoursite.azurewebsites.net), create 10 todo items, then go back in and edit some and mark some completed.
+4. Create 5 errors in your site by going to the "error" controller (i.e. https://yoursite.azurewebsites.net/Error). This page throws an "not implemented" exception. 
 
-5. Create 5 errors in your site by going to the "error" controller (i.e. https://yoursite.azurewebsites.net/Error). This page throws an "not implemented" exception. 
+5. Navigate to your deployed website (i.e. https://yoursite.azurewebsites.net), create 10 todo items, then go back in and edit some and mark some completed.
 
 6. Using the Azure Portal create an Application Insights "application dashboard". This will provide us a bunch of default metrics to keep an eye on our application. 
 
